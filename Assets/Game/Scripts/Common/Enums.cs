@@ -10,7 +10,7 @@
 		public enum UpgradeType
 		{
 			Damage,
-			AttackSpeed,
+			AttackCooldown,
 			AttackRange,
 		}
 		

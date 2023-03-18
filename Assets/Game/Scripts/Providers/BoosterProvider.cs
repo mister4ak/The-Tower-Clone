@@ -7,11 +7,11 @@ using UnityEngine;
 using Utils;
 using static Common.Enums;
 
-namespace Gameplay
+namespace Providers
 {
     public class BoosterProvider : Singleton<BoosterProvider>
     {
-        public static event Action<UpgradeType> ProgressUpdated;
+        public static event Action<UpgradeType> OnBoostersUpgraded;
 
         [SerializeField] private BoostersData _boostersData;
         [SerializeField] private BoostersUI _boostersUI;
@@ -47,13 +47,16 @@ namespace Gameplay
         public static float GetBoosterValue(UpgradeType boosterType) =>
             _boostersDataDict[boosterType].BoosterBaseValue +
             _boostersDataDict[boosterType].BoosterMultiplierValue * _boostersLevel[boosterType];
+        
+        public static float GetBoosterMultiplierValue(UpgradeType boosterType) =>
+            _boostersDataDict[boosterType].BoosterMultiplierValue;
 
         private void OnButtonClicked(UpgradeType boosterType)
         {
             int costToUpgrade = GetCost(boosterType);
             ResourceHandler.TrySubtractResource(ResourceType.Money, costToUpgrade);
             IncreaseBoosterLevel(boosterType);
-            ProgressUpdated?.Invoke(boosterType);
+            OnBoostersUpgraded?.Invoke(boosterType);
         }
 
         private void IncreaseBoosterLevel(UpgradeType boosterType)

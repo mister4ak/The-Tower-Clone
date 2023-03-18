@@ -24,6 +24,7 @@ namespace Enemy
 
         public void StopMoving()
         {
+            _rigidbody.velocity = Vector2.zero;
             _isMoving = false;
         }
 
@@ -37,7 +38,7 @@ namespace Enemy
         {
             var currentPosition = _rigidbody.position;
             var direction = (_targetPosition - currentPosition).normalized;
-            _rigidbody.MovePosition((currentPosition + direction) * _moveSpeed * Time.fixedDeltaTime);
+            _rigidbody.velocity = direction * _moveSpeed;
         }
     }
 }

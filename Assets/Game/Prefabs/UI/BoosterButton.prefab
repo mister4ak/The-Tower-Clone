@@ -107,9 +107,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 300
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3194fae651f3a61499bdace8f7ced22c, type: 2}
-  m_sharedMaterial: {fileID: -5428811024408628389, guid: 3194fae651f3a61499bdace8f7ced22c,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -139,7 +138,7 @@ MonoBehaviour:
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 45
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -241,7 +240,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8c0af11f23035ad479c7e1022f2bc780, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 44aa1546522b1024fb6c6c32bb5622f5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -320,8 +319,7 @@ MonoBehaviour:
   m_text: MAX LVL
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3194fae651f3a61499bdace8f7ced22c, type: 2}
-  m_sharedMaterial: {fileID: -5428811024408628389, guid: 3194fae651f3a61499bdace8f7ced22c,
-    type: 2}
+  m_sharedMaterial: {fileID: -5428811024408628389, guid: 3194fae651f3a61499bdace8f7ced22c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -423,7 +421,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -46.599213}
-  m_SizeDelta: {x: 0, y: 74.8126}
+  m_SizeDelta: {x: -60, y: 74.8126}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2379560508564510470
 CanvasRenderer:
@@ -455,9 +453,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: SPEED
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3194fae651f3a61499bdace8f7ced22c, type: 2}
-  m_sharedMaterial: {fileID: -5428811024408628389, guid: 3194fae651f3a61499bdace8f7ced22c,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -487,7 +484,7 @@ MonoBehaviour:
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 50
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -591,9 +588,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: LVL 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3194fae651f3a61499bdace8f7ced22c, type: 2}
-  m_sharedMaterial: {fileID: -5428811024408628389, guid: 3194fae651f3a61499bdace8f7ced22c,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -617,13 +613,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24.8
+  m_fontSize: 25
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 25
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -756,15 +752,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _upgradeType: 0
   _buyButton: {fileID: 6205978820465954924}
-  _buyButtonEnabledSprite: {fileID: 21300000, guid: 17ba90de256f05943804d3d931e30658,
-    type: 3}
-  _buyButtonDisabledSprite: {fileID: 21300000, guid: 5edd7801eaf3bec489ec0aec1412ec2d,
-    type: 3}
   _upgradeImage: {fileID: 2379560509259661935}
-  _upgradeImageEnabled: {fileID: 21300000, guid: 335ac246ae934054db89181a8f426604,
-    type: 3}
-  _upgradeImageDisabled: {fileID: 21300000, guid: d0fb045be9068724db6da3754a7d39f7,
-    type: 3}
   _moneyImage: {fileID: 2379560507856734590}
   _costText: {fileID: 2379560507685286376}
   _levelText: {fileID: 2379560508747584067}

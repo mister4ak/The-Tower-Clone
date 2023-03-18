@@ -16,6 +16,8 @@ MonoBehaviour:
   - Type: 0
     Probability: 100
   - Type: 1
-    Probability: 20
-  - Type: 2
     Probability: 10
+  - Type: 2
+    Probability: 20
+  <MinDelayBeforeSpawn>k__BackingField: 2
+  <MaxDelayBeforeSpawn>k__BackingField: 4

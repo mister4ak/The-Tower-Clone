@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using DefaultNamespace;
 using Interfaces;
 using QFSW.MOP2;
 using ScriptableObjects.Classes;
@@ -15,20 +13,47 @@ namespace Enemy
     {
         [SerializeField] private List<EnemyBasic> _enemiesPrefab;
         [SerializeField] private SpawnZone _spawnZone;
-        [SerializeField] private WaveData _waveData;
+        
         private Dictionary<EnemyType, ObjectPool> _enemiesPooles = new();
-        private float _totalWeight;
+        private List<EnemyBasic> _enemies = new();
+        private WaveData _waveData;
         private Vector2 _playerPosition;
-
-        private void Start()
-        {
-            CalculateWeights();
-            StartCoroutine(SpawnCoroutine());
-        }
+        private float _totalWeight;
 
         public void Initialize(Vector2 playerPosition)
         {
             _playerPosition = playerPosition;
+        }
+
+        public void SetCurrentWaveData(WaveData waveData)
+        {
+            _waveData = waveData;
+            CalculateWeights();
+        }
+
+        public void SpawnEnemy()
+        {
+            var enemyType = GetRandomEnemyType();
+            if (!_enemiesPooles.ContainsKey(enemyType)) 
+                CreateObjectPool(enemyType);
+
+            InitializeEnemy(enemyType);
+        }
+
+        private void CreateObjectPool(EnemyType enemyType)
+        {
+            var enemyPrefab = _enemiesPrefab.Find(x => x.Type == enemyType);
+            if (enemyPrefab == default)
+                throw new NullReferenceException($"Enemy spawner doesn't contains enemy prefab with type - {enemyType}");
+            _enemiesPooles.Add(enemyType, ObjectPool.Create(enemyPrefab.gameObject));
+        }
+
+        private void InitializeEnemy(EnemyType enemyType)
+        {
+            var enemy = _enemiesPooles[enemyType].GetObjectComponent<EnemyBasic>(_spawnZone.GetRandomPoint());
+            enemy.Initialize(_playerPosition);
+            enemy.OnDied += OnEnemyDied;
+            _enemies.Add(enemy);
         }
 
         private void CalculateWeights()
@@ -51,32 +76,21 @@ namespace Enemy
             return _waveData.EnemyChanceDatas[^1].Type;
         }
 
-        private IEnumerator SpawnCoroutine()
-        {
-            while (true)
-            {
-                var enemyType = GetRandomEnemyType();
-                if (!_enemiesPooles.ContainsKey(enemyType))
-                {
-                    var enemyPrefab = _enemiesPrefab.Find(x => x.Type == enemyType);
-                    if (enemyPrefab == default)
-                        throw new NullReferenceException($"Enemy spawner doesn't contains enemy prefab with type - {enemyType}");
-                    _enemiesPooles.Add(enemyType, ObjectPool.Create(enemyPrefab.gameObject));
-                }
-
-                var enemy = _enemiesPooles[enemyType].GetObjectComponent<EnemyBasic>(_spawnZone.GetRandomPoint());
-                enemy.Initialize(_playerPosition);
-                enemy.OnDied += OnEnemyDied;
-                
-                yield return new WaitForSeconds(1f);
-            }
-        }
-
         private void OnEnemyDied(IDamageable damageable)
         {
             if (!damageable.GameObject().TryGetComponent(out EnemyBasic enemy)) return;
             enemy.OnDied -= OnEnemyDied;
+            _enemies.Remove(enemy);
             _enemiesPooles[enemy.Type].Release(enemy.gameObject);
+        }
+
+        public void ReleaseAllEnemies()
+        {
+            foreach (var enemy in _enemies) 
+                enemy.OnDied -= OnEnemyDied;
+            _enemies.Clear();
+            foreach (var enemiesPool in _enemiesPooles.Values) 
+                enemiesPool.ReleaseAll();
         }
     }
 }

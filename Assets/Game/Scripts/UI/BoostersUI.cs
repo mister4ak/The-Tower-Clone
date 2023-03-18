@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Extensions;
-using Gameplay;
+using Providers;
 using ScriptableObjects.Classes;
 using UI.ResourcesView;
 using UnityEngine;

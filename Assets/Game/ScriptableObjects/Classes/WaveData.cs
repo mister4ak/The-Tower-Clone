@@ -9,6 +9,8 @@ namespace ScriptableObjects.Classes
     public class WaveData: ScriptableObject
     {
         [field: SerializeField] public List<EnemyChanceData> EnemyChanceDatas { get; private set; }
+        [field: SerializeField, Min(0.1f)] public float MinDelayBeforeSpawn { get; private set; }
+        [field: SerializeField, Min(0.1f)] public float MaxDelayBeforeSpawn { get; private set; }
     }
 
     [Serializable]

@@ -1,5 +1,4 @@
 ﻿using System;
-using DefaultNamespace;
 using Interfaces;
 using ScriptableObjects.Classes;
 using UnityEngine;
@@ -14,20 +13,23 @@ namespace Enemy
 
         [SerializeField] private EnemyData _enemyData;
         [SerializeField] private EnemyMover _enemyMover;
+        
         private float _health;
         private float _virtualHealth;
+        
         public GameObject GameObject() => gameObject;
-
         public EnemyType Type => _enemyData.Type;
+        public int Reward => _enemyData.Reward;
         public bool IsActive { get; set; }
         public bool IsVirtualActive { get; set; }
-        public int Reward => _enemyData.Reward;
 
         public void Initialize(Vector2 playerPosition)
         {
-            _health = _enemyData.Health;
+            _health = _virtualHealth = _enemyData.Health;
+            
             _enemyMover.Initialize(_enemyData.Speed);
             _enemyMover.MoveTo(playerPosition);
+            
             IsActive = true;
             IsVirtualActive = true;
         }
