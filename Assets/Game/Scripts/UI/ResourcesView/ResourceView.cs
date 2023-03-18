@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using Extensions;
-using ScriptableObjects.Classes.Resources;
+using ScriptableObjects.Classes;
 using UnityEngine;
 using static Common.Enums;
 using static Common.Enums.ResourceType;
@@ -41,11 +41,6 @@ namespace UI.ResourcesView
 		private void Update()
 		{
 			if (Input.GetKeyDown(KeyCode.K)) { ResourceHandler.AddResource(Money, 100); }
-
-			if (Input.GetKeyDown(KeyCode.J)) { ResourceHandler.AddResource(Resource2, 100); }
-
-			if (Input.GetKeyDown(KeyCode.L)) { ResourceHandler.AddResource(Resource3, 100); }
-
 			if (Input.GetKeyDown(KeyCode.M)) { ResourceHandler.TrySubtractResource(Money, 100); }
 		}
 #endif

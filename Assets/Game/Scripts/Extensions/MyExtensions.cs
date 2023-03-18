@@ -332,5 +332,49 @@ namespace Extensions
 		{
 			return Vector3.Dot(origin.forward, (target.transform.position - origin.position).XZOnly().normalized);
 		}
+
+		/// <param name="canvasGroup"></param>
+		/// <param name="duration">Duration of fading in, cannot be negative</param>
+		/// <param name="delay">Delay before canvas group show, cannot be negative</param>
+		/// <param name="callback">Action after complete</param>
+		public static void Show(this CanvasGroup canvasGroup, float duration = 0, float delay = 0,
+			Action callback = null)
+		{
+			if (duration < 0) throw new ArgumentException("Value cannot be negative", nameof(duration));
+
+			if (delay < 0) throw new ArgumentException("Value cannot be negative", nameof(delay));
+
+			canvasGroup.DOKill();
+			canvasGroup.DOFade(1, duration)
+				.SetDelay(delay)
+				.OnComplete(() =>
+				{
+					canvasGroup.interactable = true;
+					canvasGroup.blocksRaycasts = true;
+					callback?.Invoke();
+				});
+		}
+
+		/// <param name="canvasGroup"></param>
+		/// <param name="duration">Duration of fading out, cannot be negative</param>
+		/// <param name="delay">Delay before canvas group hide, cannot be negative</param>
+		/// <param name="callback">Action after complete</param>
+		public static void Hide(this CanvasGroup canvasGroup, float duration = 0, float delay = 0,
+			Action callback = null)
+		{
+			if (duration < 0) throw new ArgumentException("Value cannot be negative", nameof(duration));
+
+			if (delay < 0) throw new ArgumentException("Value cannot be negative", nameof(delay));
+
+			canvasGroup.DOKill();
+			canvasGroup.DOFade(0, duration)
+				.SetDelay(delay)
+				.OnStart(() =>
+				{
+					canvasGroup.interactable = false;
+					canvasGroup.blocksRaycasts = false;
+				})
+				.OnComplete(() => { callback?.Invoke(); });
+		}
 	}
 }

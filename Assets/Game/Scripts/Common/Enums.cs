@@ -4,9 +4,21 @@
 	{
 		public enum ResourceType
 		{
-			Money,
-			Resource2,
-			Resource3,
+			Money = 0,
+		}
+
+		public enum UpgradeType
+		{
+			Damage,
+			AttackSpeed,
+			AttackRange,
+		}
+		
+		public enum EnemyType
+		{
+			Small = 0,
+			Medium = 1,
+			Fast = 2,
 		}
 	}
 }
