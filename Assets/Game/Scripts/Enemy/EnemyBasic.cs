@@ -1,22 +1,26 @@
 ﻿using System;
 using DefaultNamespace;
+using Interfaces;
 using ScriptableObjects.Classes;
 using UnityEngine;
 using static Common.Enums;
 
 namespace Enemy
 {
-    public class EnemyBasic : MonoBehaviour, IDamageable
+    public class EnemyBasic : MonoBehaviour, IVirtualDamageable
     {
-        public event Action<IDamageable> Died;
+        public event Action<IVirtualDamageable> OnVirtualDied;
+        public event Action<IDamageable> OnDied;
 
         [SerializeField] private EnemyData _enemyData;
         [SerializeField] private EnemyMover _enemyMover;
         private float _health;
-
+        private float _virtualHealth;
         public GameObject GameObject() => gameObject;
+
         public EnemyType Type => _enemyData.Type;
         public bool IsActive { get; set; }
+        public bool IsVirtualActive { get; set; }
         public int Reward => _enemyData.Reward;
 
         public void Initialize(Vector2 playerPosition)
@@ -25,9 +29,24 @@ namespace Enemy
             _enemyMover.Initialize(_enemyData.Speed);
             _enemyMover.MoveTo(playerPosition);
             IsActive = true;
+            IsVirtualActive = true;
         }
         
-        public void TakeDamage(float damage)
+        public void TakeVirtualDamage(float damage)
+        {
+            _virtualHealth -= damage;
+            if (_virtualHealth <= 0)
+                VirtualDie();
+        }
+
+        private void VirtualDie()
+        {
+            if (!IsVirtualActive) return;
+            IsVirtualActive = false;
+            OnVirtualDied?.Invoke(this);
+        }
+
+        public void TakeRealDamage(float damage)
         {
             _health -= damage;
             if (_health <= 0)
@@ -39,7 +58,7 @@ namespace Enemy
             if (!IsActive) return;
             IsActive = false;
             _enemyMover.StopMoving();
-            Died?.Invoke(this);
+            OnDied?.Invoke(this);
         }
     }
 }

@@ -1,13 +1,13 @@
 ﻿using System;
 using UnityEngine;
 
-namespace DefaultNamespace
+namespace Interfaces
 {
     public interface IDamageable
     {
-        public event Action<IDamageable> Died;
+        public event Action<IDamageable> OnDied;
         GameObject GameObject();
-        void TakeDamage(float damage);
+        void TakeRealDamage(float damage);
         bool IsActive { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
+using Interfaces;
 using QFSW.MOP2;
 using ScriptableObjects.Classes;
 using UnityEngine;
@@ -65,7 +66,7 @@ namespace Enemy
 
                 var enemy = _enemiesPooles[enemyType].GetObjectComponent<EnemyBasic>(_spawnZone.GetRandomPoint());
                 enemy.Initialize(_playerPosition);
-                enemy.Died += OnEnemyDied;
+                enemy.OnDied += OnEnemyDied;
                 
                 yield return new WaitForSeconds(1f);
             }
@@ -74,7 +75,7 @@ namespace Enemy
         private void OnEnemyDied(IDamageable damageable)
         {
             if (!damageable.GameObject().TryGetComponent(out EnemyBasic enemy)) return;
-            enemy.Died -= OnEnemyDied;
+            enemy.OnDied -= OnEnemyDied;
             _enemiesPooles[enemy.Type].Release(enemy.gameObject);
         }
     }

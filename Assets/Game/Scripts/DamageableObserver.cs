@@ -1,4 +1,5 @@
 ﻿using System;
+using Interfaces;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -6,8 +7,8 @@ namespace DefaultNamespace
     [RequireComponent(typeof(Collider2D))]
     public class DamageableObserver : MonoBehaviour
     {
-        public event Action<IDamageable> OnEntered;
-        public event Action<IDamageable> OnExited;
+        public event Action<IVirtualDamageable> OnEntered;
+        public event Action<IVirtualDamageable> OnExited;
         
         private Collider2D _collider;
 
@@ -25,13 +26,13 @@ namespace DefaultNamespace
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (!other.TryGetComponent(out IDamageable damageable)) return;
+            if (!other.TryGetComponent(out IVirtualDamageable damageable)) return;
             OnEntered?.Invoke(damageable);
         }
         
         private void OnTriggerExit2D(Collider2D other)
         {
-            if (!other.TryGetComponent(out IDamageable damageable)) return;
+            if (!other.TryGetComponent(out IVirtualDamageable damageable)) return;
             OnExited?.Invoke(damageable);
         }
     }
