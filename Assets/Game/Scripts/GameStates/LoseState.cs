@@ -5,7 +5,7 @@ namespace GameStates
 {
     public class LoseState : IState
     {
-        private GameUI _gameUI;
+        private readonly GameUI _gameUI;
         public bool IsRestartButtonClicked { get; private set; }
 
         public LoseState(GameUI gameUI)

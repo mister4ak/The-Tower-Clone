@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ScriptableObjects.Classes;
-using UI;
+using UI.Boosters;
 using UI.ResourcesView;
 using UnityEngine;
 using Utils;
@@ -19,7 +19,7 @@ namespace Providers
         private static readonly Dictionary<UpgradeType, int> _boostersLevel = new();
         private static readonly Dictionary<UpgradeType, BoosterData> _boostersDataDict = new();
 
-        private void Start()
+        public void Initialize()
         {
             foreach (var boosterDataDictionary in _boostersData.Data)
             {

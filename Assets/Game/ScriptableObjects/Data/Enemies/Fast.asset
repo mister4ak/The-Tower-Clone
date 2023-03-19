@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Type>k__BackingField: 2
   <Health>k__BackingField: 6
-  <Speed>k__BackingField: 1.4
+  <Speed>k__BackingField: 1.6
   <Reward>k__BackingField: 2

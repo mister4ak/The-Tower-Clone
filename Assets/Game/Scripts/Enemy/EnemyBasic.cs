@@ -8,8 +8,8 @@ namespace Enemy
 {
     public class EnemyBasic : MonoBehaviour, IVirtualDamageable
     {
-        public event Action<IVirtualDamageable> OnVirtualDied;
-        public event Action<IDamageable> OnDied;
+        public event Action<IVirtualDamageable> VirtualDied;
+        public event Action<IDamageable> Died;
 
         [SerializeField] private EnemyData _enemyData;
         [SerializeField] private EnemyMover _enemyMover;
@@ -34,6 +34,11 @@ namespace Enemy
             IsVirtualActive = true;
         }
         
+        public void StopMoving()
+        {
+            _enemyMover.StopMoving();
+        }
+        
         public void TakeVirtualDamage(float damage)
         {
             _virtualHealth -= damage;
@@ -45,7 +50,7 @@ namespace Enemy
         {
             if (!IsVirtualActive) return;
             IsVirtualActive = false;
-            OnVirtualDied?.Invoke(this);
+            VirtualDied?.Invoke(this);
         }
 
         public void TakeRealDamage(float damage)
@@ -59,8 +64,8 @@ namespace Enemy
         {
             if (!IsActive) return;
             IsActive = false;
-            _enemyMover.StopMoving();
-            OnDied?.Invoke(this);
+            StopMoving();
+            Died?.Invoke(this);
         }
     }
 }

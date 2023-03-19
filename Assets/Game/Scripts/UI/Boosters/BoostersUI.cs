@@ -7,7 +7,7 @@ using UI.ResourcesView;
 using UnityEngine;
 using static Common.Enums;
 
-namespace UI
+namespace UI.Boosters
 {
     public class BoostersUI : MonoBehaviour
     {

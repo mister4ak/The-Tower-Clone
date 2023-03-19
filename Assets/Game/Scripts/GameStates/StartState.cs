@@ -7,15 +7,13 @@ namespace GameStates
 {
     public class StartState: IState
     {
-        private GameUI _gameUI;
-        private PlayerBase _player;
-        private EnemySpawner _enemySpawner;
+        private readonly GameUI _gameUI;
+        private readonly EnemySpawner _enemySpawner;
         public bool IsGameStarted { get; private set; }
 
-        public StartState(GameUI gameUI, PlayerBase player, EnemySpawner enemySpawner)
+        public StartState(GameUI gameUI, EnemySpawner enemySpawner)
         {
             _enemySpawner = enemySpawner;
-            _player = player;
             _gameUI = gameUI;
         }
 

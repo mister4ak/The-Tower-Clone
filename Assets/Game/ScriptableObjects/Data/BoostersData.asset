@@ -15,19 +15,19 @@ MonoBehaviour:
   _boostersData:
   - BoosterType: 0
     BoosterData:
-      BoosterBaseUpgradeCost: 20
-      BoosterMultiplierCost: 1.2
+      BoosterBaseUpgradeCost: 8
+      BoosterMultiplierCost: 1.8
       BoosterBaseValue: 2
       BoosterMultiplierValue: 2
-      BoosterMaxLevel: 3
+      BoosterMaxLevel: 2
       BuyButtonEnabledSprite: {fileID: 21300000, guid: 17ba90de256f05943804d3d931e30658, type: 3}
       BuyButtonDisabledSprite: {fileID: 21300000, guid: 5edd7801eaf3bec489ec0aec1412ec2d, type: 3}
       UpgradeImageEnabled: {fileID: 21300000, guid: 335ac246ae934054db89181a8f426604, type: 3}
       UpgradeImageDisabled: {fileID: 21300000, guid: d0fb045be9068724db6da3754a7d39f7, type: 3}
   - BoosterType: 1
     BoosterData:
-      BoosterBaseUpgradeCost: 30
-      BoosterMultiplierCost: 1.2
+      BoosterBaseUpgradeCost: 10
+      BoosterMultiplierCost: 1.4
       BoosterBaseValue: 0.5
       BoosterMultiplierValue: -0.05
       BoosterMaxLevel: 3
@@ -37,10 +37,10 @@ MonoBehaviour:
       UpgradeImageDisabled: {fileID: 21300000, guid: d0fb045be9068724db6da3754a7d39f7, type: 3}
   - BoosterType: 2
     BoosterData:
-      BoosterBaseUpgradeCost: 25
-      BoosterMultiplierCost: 1.3
+      BoosterBaseUpgradeCost: 12
+      BoosterMultiplierCost: 1.6
       BoosterBaseValue: 0
-      BoosterMultiplierValue: 0.1
+      BoosterMultiplierValue: 0.07
       BoosterMaxLevel: 3
       BuyButtonEnabledSprite: {fileID: 21300000, guid: 17ba90de256f05943804d3d931e30658, type: 3}
       BuyButtonDisabledSprite: {fileID: 21300000, guid: 5edd7801eaf3bec489ec0aec1412ec2d, type: 3}

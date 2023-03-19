@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static Common.Enums;
 
-namespace UI
+namespace UI.Boosters
 {
     public class BoosterButton : MonoBehaviour
     {
@@ -44,7 +44,7 @@ namespace UI
             _costText.text = cost.ToString();
 
         public void SetLevelText(int level) =>
-            _levelText.text = $"Level {level}";
+            _levelText.text = $"Level {level + 1}";
 
         public void Toggle(bool enable)
         {

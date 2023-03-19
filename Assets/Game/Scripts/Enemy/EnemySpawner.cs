@@ -4,6 +4,7 @@ using Interfaces;
 using QFSW.MOP2;
 using ScriptableObjects.Classes;
 using UnityEngine;
+using Zones;
 using static Common.Enums;
 using Random = UnityEngine.Random;
 
@@ -11,6 +12,8 @@ namespace Enemy
 {
     public class EnemySpawner : MonoBehaviour
     {
+        public event Action<EnemyBasic> EnemyDied;
+        
         [SerializeField] private List<EnemyBasic> _enemiesPrefab;
         [SerializeField] private SpawnZone _spawnZone;
         
@@ -40,19 +43,31 @@ namespace Enemy
             InitializeEnemy(enemyType);
         }
 
+        public void StopAllEnemies()
+        {
+            foreach (var enemy in _enemies)
+            {
+                enemy.StopMoving();
+            }
+        }
+
         private void CreateObjectPool(EnemyType enemyType)
         {
             var enemyPrefab = _enemiesPrefab.Find(x => x.Type == enemyType);
             if (enemyPrefab == default)
                 throw new NullReferenceException($"Enemy spawner doesn't contains enemy prefab with type - {enemyType}");
-            _enemiesPooles.Add(enemyType, ObjectPool.Create(enemyPrefab.gameObject));
+            
+            var objectPool = ObjectPool.Create(enemyPrefab.gameObject);
+            objectPool.ObjectParent.SetParent(transform);
+            
+            _enemiesPooles.Add(enemyType, objectPool);
         }
 
         private void InitializeEnemy(EnemyType enemyType)
         {
             var enemy = _enemiesPooles[enemyType].GetObjectComponent<EnemyBasic>(_spawnZone.GetRandomPoint());
             enemy.Initialize(_playerPosition);
-            enemy.OnDied += OnEnemyDied;
+            enemy.Died += OnEnemyDied;
             _enemies.Add(enemy);
         }
 
@@ -79,7 +94,8 @@ namespace Enemy
         private void OnEnemyDied(IDamageable damageable)
         {
             if (!damageable.GameObject().TryGetComponent(out EnemyBasic enemy)) return;
-            enemy.OnDied -= OnEnemyDied;
+            enemy.Died -= OnEnemyDied;
+            EnemyDied?.Invoke(enemy);
             _enemies.Remove(enemy);
             _enemiesPooles[enemy.Type].Release(enemy.gameObject);
         }
@@ -87,7 +103,7 @@ namespace Enemy
         public void ReleaseAllEnemies()
         {
             foreach (var enemy in _enemies) 
-                enemy.OnDied -= OnEnemyDied;
+                enemy.Died -= OnEnemyDied;
             _enemies.Clear();
             foreach (var enemiesPool in _enemiesPooles.Values) 
                 enemiesPool.ReleaseAll();

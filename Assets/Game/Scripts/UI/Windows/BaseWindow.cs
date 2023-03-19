@@ -2,7 +2,7 @@ using System;
 using Extensions;
 using UnityEngine;
 
-namespace UI
+namespace UI.Windows
 {
     public class BaseWindow : MonoBehaviour
     {

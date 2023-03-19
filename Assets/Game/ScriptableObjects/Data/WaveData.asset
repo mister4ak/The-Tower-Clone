@@ -19,5 +19,8 @@ MonoBehaviour:
     Probability: 10
   - Type: 2
     Probability: 20
-  <MinDelayBeforeSpawn>k__BackingField: 2
-  <MaxDelayBeforeSpawn>k__BackingField: 4
+  <WaveDuration>k__BackingField: 10
+  <StartMinSpawnTimer>k__BackingField: 2
+  <StartMaxSpawnTimer>k__BackingField: 3
+  <DecreaseSpawnSpeedPerWave>k__BackingField: 0.2
+  <MinSpawnTimeInGame>k__BackingField: 0.3
